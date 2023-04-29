@@ -1,0 +1,79 @@
+<header>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6" >
+           <h2 class="text-uppercase">User</h2>
+        </div>
+        <div class="col-sm-6">
+            <button class="btn btn-primary" style="float: right;" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="addmodel()">Add User</button>
+        </div>
+    </div>
+</div>
+</header>
+<br><br>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Website</th>
+                    <th>Action</th>
+                </tr>
+                <tr *ngFor="let user of data; let i = index;">
+                    <td>{{i+1}}</td>
+                    <td>{{user.name}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.phone}}</td>
+                    <td>{{user.website}}</td>
+                    <td>
+                        <button class="btn btn-primary " (click)="edit(i, user)" data-bs-toggle="modal" data-bs-target="#exampleModal" style="margin-right: 20px;"><i class="bi bi-pencil-square"></i></button>
+                        <button class="btn btn-danger" (click)="delete(i, user)"><i class="bi bi-trash3-fill"></i></button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{isedit ? 'Edit User Details' : 'Add User'}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="form-box">
+                <form [formGroup]="userform" (ngSubmit)="isedit ? update(userform) : sendata(userform)">
+                    <div class="form-group">
+                        <label for="">name</label>
+                        <input type="text" name="" placeholder="name" formControlName="name" class="form-control mt-3 mb-3" id="">
+                    </div>
+                    <div class="form-group">
+                        <label for="">email</label>
+                        <input type="email" name="" placeholder="email" formControlName="email" class="form-control mt-3 mb-3" id="">
+                    </div>
+                    <div class="form-group">
+                        <label for="">phone</label>
+                        <input type="text" name="" placeholder="phone" formControlName="phone" class="form-control mt-3 mb-3" id="">
+                    </div>
+                    <div class="form-group">
+                        <label for="">website</label>
+                        <input type="text" name="" placeholder="website" formControlName="website" class="form-control mt-3 mb-3" id="">
+                    </div>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="model">{{isedit ? 'UPDATE' : 'SUBMIT'}}</button>
+                </form>
+            </div>
+        </div>        
+      </div>
+    </div>
+  </div>
